@@ -2,10 +2,10 @@
 all: frequency trie.o
 
 frequency:trie.o 
-	gcc -Wall -o frequency trie.o
+	gcc -Wall -g -o frequency trie.o
 
 trie.o: trie.c trie.h
-	gcc -Wall -c trie.c
+	gcc -Wall -g -c trie.c
 
 .PHONY: clean all 
 

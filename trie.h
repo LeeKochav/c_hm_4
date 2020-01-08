@@ -24,8 +24,12 @@ Trie* initTrie();
 Node* newNode(char letter);
 void add(Trie* root, char word[],int sizeWord);
 void print(Trie* root);
+void printR(Trie* root);
 void printNode(Node* node, char str[], int index);
-void printNode2(Node* node, char str[], int index);
+void printNodeR(Node* node, char str[], int index);
+int getWord(char w[]);
+void trieFree(Trie* root);
+void nodeFree(Node* node);
 
 
 #endif

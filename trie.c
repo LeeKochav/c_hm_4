@@ -19,6 +19,7 @@ Node* newNode(char let)
     {
         node->children[i]=NULL;
     }
+    node->wordEnd=FALSE;
     node->count=0;
     return node;
 }
@@ -46,7 +47,14 @@ void print(Trie* root)
 {
     char str[WORD_SIZE]={};
 
-    printNode2(root->head,str,0);
+    printNode(root->head,str,0);
+}
+
+void printR(Trie* root)
+{
+    char str[WORD_SIZE]={};
+
+    printNodeR(root->head,str,0);
 }
 
 void printNode(Node* node, char str[], int index)
@@ -70,7 +78,7 @@ void printNode(Node* node, char str[], int index)
     }
 }
 
-void printNode2(Node* node, char str[], int index)
+void printNodeR(Node* node, char str[], int index)
 {
     if(node!=NULL)
     {
@@ -80,7 +88,7 @@ void printNode2(Node* node, char str[], int index)
         if(node->children[i]!=NULL)
         {
         str[index]=i+'a';
-        printNode2(node->children[i],str,index+1);
+        printNodeR(node->children[i],str,index+1);
         }
     }
     if(node->wordEnd==TRUE)
@@ -91,16 +99,77 @@ void printNode2(Node* node, char str[], int index)
     }
 }
 
-
-int main()
+int getWord(char w[])
 {
- 
- char word[]="lee";
-Trie* t=initTrie();
-add(t,word,strlen(word));
-add(t,"abc",3);
-add(t,"abcc",4);
-add(t,"abcd",4);
-print(t);
+    char c;
+    int size=0;
+    while(scanf("%c",&c)==1&&size<WORD_SIZE)
+    {
+    
+        if((c=='\n')||(c=='\t')||(c==' '))
+        {
+            return size;
+        }
+        if((c>='a'&&c<='z')||(c>='A'&&c<='Z'))
+        {
+        if(c>='A'&&c<='Z')
+        {
+            c=c+32;
+        }
+        w[size++]=c;
+        }
+     
+    }
+    return size;
+
+}
+void trieFree(Trie* root)
+{
+   if(root!=NULL)
+   {
+     nodeFree(root->head);
+   } 
+   free(root);
+}
+
+void nodeFree(Node* node)
+{
+    for(int i=NUM_LETTERS-1; i>=0; i--)
+    {
+        if(node->children[i]!=NULL)
+        {
+         nodeFree(node->children[i]);
+        }
+    }
+    if(node!=NULL)
+    {
+    free(node);
+    }
+}
+
+int main(int argc, char* argv[])
+{
+    int size;
+    char word [WORD_SIZE];
+    Trie* t=initTrie();
+    size=getWord(word);
+    while(size>0)
+    {
+        add(t,word,size);
+        size=getWord(word);
+    }
+    if(argc==1)
+    {
+        print(t);
+    }
+    else if(argc==2)
+    {
+        if(strcmp(argv[1],"r")==0)
+        {
+        printR(t);
+        }
+    }
+    trieFree(t);
+    return 0;
     
 }
