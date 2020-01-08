@@ -100,7 +100,7 @@ Trie* t=initTrie();
 add(t,word,strlen(word));
 add(t,"abc",3);
 add(t,"abcc",4);
-add(t,"abcd",5);
+add(t,"abcd",4);
 print(t);
     
 }

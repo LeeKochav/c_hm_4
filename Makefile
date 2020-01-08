@@ -1,5 +1,5 @@
 
-all: frequency
+all: frequency trie.o
 
 frequency:trie.o 
 	gcc -Wall -o frequency trie.o
@@ -11,3 +11,4 @@ trie.o: trie.c trie.h
 
 clean:
 	rm -f *.o frequency
+
