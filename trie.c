@@ -137,9 +137,9 @@ int main(int argc, char* argv[])
     char c;
     int size=0;
     int max=0;
-    while(scanf(" %c",&c)==1) 
+    while(scanf("%c",&c)==1) 
     {
-        if((c=='\n')||(c=='\t')||(c==' ')||(c==',')||(c=='.')) //indicated that this is the end of the word
+        if((c=='\n')||(c=='\t')||(c==' ')) //indicated that this is the end of the word
         {
             if(size!=0) //word is not empty 
             {
